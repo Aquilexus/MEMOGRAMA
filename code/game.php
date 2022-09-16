@@ -1,23 +1,3 @@
-<?php
- $cant_players = $_GET["players_cant"];
- $nom1 = $_GET["nom1"];
- setcookie("nom1",$nom1);
-
- if ($cant_players >= 2) {
-    $nom2 = $_GET["nom2"];
-    setcookie("nom2",$nom2);
-}
-if ($cant_players >= 3) {
-        $nom3 = $_GET["nom3"];
-        setcookie("nom3",$nom3);
-    }
- if ($cant_players == 4) {
-        $nom4 = $_GET["nom4"];
-        setcookie("nom4",$nom4);
-    }       
-
- 
-?>
 
 <!DOCTYPE html>
 <html>
@@ -45,7 +25,6 @@ if ($cant_players >= 3) {
 
             <!--Aquí es donde se generan los bloques con el nombre y puntuacion de los jugadores-->
             <?php
-        
 
             //$cant_players = $_GET["players_cant"];
             //$nom1 = $_GET["nom1"];
@@ -183,9 +162,7 @@ if ($cant_players >= 3) {
         </div>
     </div>
     </form>
-    <?php 
     
-    ?>
 </body>
 
 </html>
