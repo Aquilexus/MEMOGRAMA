@@ -11,7 +11,7 @@
         </div>
         <div class="middle">
             <div class="board">
-                <p><?php echo $_COOKIE["test"]?></p>
+                <p><?php echo $_COOKIE["nom1"]?></p>
             </div>
         </div>
     </body>

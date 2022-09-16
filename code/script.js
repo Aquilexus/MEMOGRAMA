@@ -29,6 +29,7 @@ var state_card1;
 var state_card2;
 
 var game_ended=false;
+var interval;
 
 
 function setTime(time){
@@ -49,30 +50,31 @@ function timer() {
         h2.id="countdown";
         div1.appendChild(h2);
 
-        setInterval(countdown, 1000);
+       interval = setInterval(countdown, 1000);
     }
      
 
-    function countdown() {
-        if (game_ended) {
-            clearInterval(countdown());
-        }
-        var time_div = document.getElementById("countdown");
-        time_div.innerHTML = "";
-        
-        if (time < 0) {
-            time = this.time_saved;
-            turn++
-            resetCards();
-            turn_rotation();
-        }
-        
-
-        time_div.innerHTML = time;
-        time--;
-
-
+    
+}
+function countdown() {
+    if (game_ended) {
+        clearInterval(interval);
     }
+    var time_div = document.getElementById("countdown");
+    time_div.innerHTML = "";
+    
+    if (time < 0) {
+        time = this.time_saved;
+        turn++
+        resetCards();
+        turn_rotation();
+    }
+    
+
+    time_div.innerHTML = time;
+    time--;
+
+
 }
 
 function resetCards(){
@@ -376,6 +378,7 @@ function enableClick() {
 function check_ended() {
 
     if ((cards_found.length / 2) == characters_available) {
+
         var butons = document.getElementById("buttons");
         var imput = document.createElement("BUTTON");
         imput.appendChild(document.createTextNode("Nueva Partida"));
@@ -393,5 +396,6 @@ function check_ended() {
      butons.appendChild(imput2);
 
         game_ended=true;
+        
     }
 }

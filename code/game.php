@@ -17,7 +17,6 @@ if ($cant_players >= 3) {
     }       
 
  
- 
 ?>
 
 <!DOCTYPE html>
