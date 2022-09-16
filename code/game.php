@@ -11,10 +11,10 @@ if ($cant_players >= 3) {
         $nom3 = $_GET["nom3"];
         setcookie("nom3",$nom3);
     }
-    if ($cant_players == 4) {
+ if ($cant_players == 4) {
         $nom4 = $_GET["nom4"];
         setcookie("nom4",$nom4);
-    }    
+    }       
 
  
  
