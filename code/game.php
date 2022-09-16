@@ -1,3 +1,25 @@
+<?php
+ $cant_players = $_GET["players_cant"];
+ $nom1 = $_GET["nom1"];
+ setcookie("nom1",$nom1);
+
+ if ($cant_players >= 2) {
+    $nom2 = $_GET["nom2"];
+    setcookie("nom2",$nom2);
+}
+if ($cant_players >= 3) {
+        $nom3 = $_GET["nom3"];
+        setcookie("nom3",$nom3);
+    }
+    if ($cant_players == 4) {
+        $nom4 = $_GET["nom4"];
+        setcookie("nom4",$nom4);
+    }    
+
+ 
+ 
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -24,9 +46,10 @@
 
             <!--Aquí es donde se generan los bloques con el nombre y puntuacion de los jugadores-->
             <?php
+        
 
-            $cant_players = $_GET["players_cant"];
-            $nom1 = $_GET["nom1"];
+            //$cant_players = $_GET["players_cant"];
+            //$nom1 = $_GET["nom1"];
             echo "<div id=\"p1\">";
             echo "<h2 id=\"name1\">" . $nom1 . "<h2 id=\"score1\">0</h2></h2>";
             echo "</div>";
@@ -153,11 +176,17 @@
     </div>
     </div>
      
-    <div id="bottom">
+    
+
+    <form action="hallOfFame.php" method="get">
+        <div id="bottom">
         <div id="buttons">
         </div>
-
     </div>
+    </form>
+    <?php 
+    
+    ?>
 </body>
 
 </html>
