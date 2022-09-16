@@ -1,0 +1,152 @@
+:root{
+  --test: calc(80vw);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+
+
+body {
+  background-image: url(../images/background.png);
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+}
+
+h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding-left: 20px;
+}
+
+
+#p1 {
+background-image: url(../images/wood.png);
+background-position: center;
+background-size: 200px;
+background-repeat: no-repeat;
+width: 200px;
+}
+
+
+#p2,
+#p3,
+#p4 {
+  background-image: url(../images/wood.png);
+background-position: center;
+background-size: 200px;
+background-repeat: no-repeat;
+width: 200px;
+}
+
+
+#title {
+  text-align: center;
+
+  width: fit-content;
+  padding: 10px;
+  border-radius: 5px;
+
+  margin: auto;
+  
+  margin-top: 1%;
+}
+
+
+
+.ok,.flipped {
+  display: block;
+  width: 100px;
+  height: 170px;
+  border-radius: 10px;
+  border: 3px solid rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  
+}
+
+.ok{
+  border: 3px solid rgb(175, 24, 5);
+  border-radius: 10px;
+}
+
+
+
+
+
+#top {
+  display: flex;
+}
+#nav{
+  display: flex;
+  justify-content: center
+}
+
+.main{
+  display: flex;
+}
+
+#middle {
+  display: inline-flex;
+  width: 71%;
+  justify-content: center
+}
+
+#player_score {
+  display: inline-flex;
+  
+  flex-direction: column;
+  /*margin-right: 110px;*/
+
+}
+
+.button {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: inset 0px 0px 0px 0px #a4e271;
+  background: linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+  background-color: #89c403;
+  border-radius: 22px;
+  border: 1px solid #000000;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 21px;
+  font-weight: bold;
+  padding: 9px 36px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #528009;
+}
+
+#new_game:hover {
+  background: linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+  background-color: #77a809;
+}
+
+#new_game:active {
+  position: relative;
+  top: 1px;
+}
+
+#buttons{
+  text-align: center;
+}
+
+#timer{
+  display: grid;
+  width: 60px;
+  border: 2px solid black;
+  height: 60px;
+  border-radius: 100%;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  
+}
+#countdown{
+  padding-left: 0px;
+  font-family: 'Bungee Spice', cursive;
+  font-size: 45px;
+}
+
