@@ -1,0 +1,21 @@
+body{
+    background-image: url(../images/fame_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo{
+    text-align: center;
+    
+    height: fit-content;
+}
+
+.logo > img{
+    height: 7rem;
+}
+
+.middle{
+    display: flex;
+    
+    
+}
