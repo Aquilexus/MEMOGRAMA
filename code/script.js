@@ -388,7 +388,8 @@ function check_ended() {
         imput2.appendChild(document.createTextNode("Hall of Fame"));
         //imput2.setAttribute("onclick", "location.reload();");
         imput2.id = "hall_of_fame";
-        imput2.className="button"
+        imput2.className="button";
+        imput2.type="submit";
      butons.appendChild(imput2);
 
         game_ended=true;

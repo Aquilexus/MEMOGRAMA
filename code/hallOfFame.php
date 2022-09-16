@@ -11,8 +11,7 @@
         </div>
         <div class="middle">
             <div class="board">
-                <p>test</p>
-
+                <p><?php echo $_COOKIE["test"]?></p>
             </div>
         </div>
     </body>
