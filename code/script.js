@@ -388,8 +388,9 @@ function check_ended() {
         imput.setAttribute("onclick", "location.reload();");
         imput.id = "new_game";
         imput.className="button"
-     butons.appendChild(imput);
+     butons.prepend(imput);
 
+        butons=document.getElementById("fame")
         var imput2 = document.createElement("BUTTON");
         imput2.appendChild(document.createTextNode("Hall of Fame"));
         //imput2.setAttribute("onclick", "location.reload();");

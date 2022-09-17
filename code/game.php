@@ -132,6 +132,9 @@ function createBoard(){
     </div><!--Nota : si quitamos este div se descolocan los botones-->
         <div id="bottom">
             <div id="buttons">
+                <form id="fame" action="hallOfFame.php">
+
+                </form>
             </div>
         </div>
 </body>

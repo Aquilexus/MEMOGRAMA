@@ -97,8 +97,13 @@ width: 200px;
   /*margin-right: 110px;*/
 
 }
+#bottom{
+  display: flex;
+  justify-content: center
+}
 
 .button {
+  display: inline-block;
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
@@ -149,3 +154,6 @@ width: 200px;
   font-size: 45px;
 }
 
+#fame{
+  display: inline-block;
+}
