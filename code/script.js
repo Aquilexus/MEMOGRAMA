@@ -4,7 +4,7 @@
 var time;
 var time_saved;
 
-const characters = ["Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou"];
+const characters= ["Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou"];
 
 var card1 = "";
 var card2 = "";
@@ -37,6 +37,7 @@ this.time = time;
 this.time_saved = time;
 }
 
+//Funcion que crea los divs para posicionar la cuenta atras
 function timer() {
 
     if (time_saved != 0 ) {
@@ -56,10 +57,9 @@ function timer() {
 
     
 }
+//Esta funcion actualiza los numeros del contador
 function countdown() {
-    if (game_ended) {
-        clearInterval(interval);
-    }
+    
     var time_div = document.getElementById("countdown");
     time_div.innerHTML = "";
     
@@ -76,7 +76,7 @@ function countdown() {
 
 
 }
-
+//Resetear cartas hacia boca abajo
 function resetCards(){
     var cards = document.getElementsByClassName("flipped");
 
@@ -90,6 +90,7 @@ function resetCards(){
     enableClick();
 }
 
+//Determina quien empieza primero
 function setTurn(num_of_players){
    turn = Math.floor(Math.random() * num_of_players+1);
 }
@@ -118,6 +119,7 @@ function turn_rotation() {
 
 }
 
+//Actualiza la puntuacion de cada jugador
 function updateScore() {
 
     //Segun el turno de cada jugador si hay punto se le asigna el punto al jugador correspondiente
@@ -156,7 +158,7 @@ function updateScore() {
 }
 
 
-//Esta funcion es para el formulario lo qu hace es generar imputs para los jugadores en funcion del valor que retorna el select
+//Esta funcion es para el formulario. Lo que hace es generar imputs para los jugadores en funcion del valor que retorna el select
 function set_PlayerName(cant) {
 
     num_players = cant;
@@ -238,7 +240,7 @@ function flip(nombre) {
 
 
 }
-
+//Esta funcion comprueba si las cartas son iguales en funcion de su id en HTML
 function check_cards() {
 
     var card1_dup = false;
@@ -374,12 +376,13 @@ function enableClick() {
 
 }
 
-
+//Verificacion si se encontraron todas las cartas
 function check_ended() {
 
     if ((cards_found.length / 2) == characters_available) {
 
         var butons = document.getElementById("buttons");
+        
         var imput = document.createElement("BUTTON");
         imput.appendChild(document.createTextNode("Nueva Partida"));
         imput.setAttribute("onclick", "location.reload();");
@@ -396,6 +399,7 @@ function check_ended() {
      butons.appendChild(imput2);
 
         game_ended=true;
+        clearInterval(interval);
         
     }
 }
