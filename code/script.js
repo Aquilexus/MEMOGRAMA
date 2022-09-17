@@ -1,9 +1,5 @@
 
-
 //alert("Fet per en \"Paul Soual\" 2n de DAW");
-
-
-
 
 var time;
 var time_saved;
@@ -31,6 +27,10 @@ var state_card2;
 var game_ended=false;
 var interval;
 
+
+function getScore(){
+    return p1_score;
+}
 
 function setTime(time){
 this.time = time;

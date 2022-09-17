@@ -26,8 +26,8 @@
             <!--Aquí es donde se generan los bloques con el nombre y puntuacion de los jugadores-->
             <?php
 
-            //$cant_players = $_GET["players_cant"];
-            //$nom1 = $_GET["nom1"];
+            $cant_players = $_GET["players_cant"];
+            $nom1 = $_GET["nom1"];
             echo "<div id=\"p1\">";
             echo "<h2 id=\"name1\">" . $nom1 . "<h2 id=\"score1\">0</h2></h2>";
             echo "</div>";

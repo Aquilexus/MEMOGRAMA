@@ -77,7 +77,7 @@ width: 200px;
 }
 #nav{
   display: flex;
-  justify-content: center
+  
 }
 
 .main{
@@ -139,7 +139,6 @@ width: 200px;
   height: 60px;
   border-radius: 100%;
   align-content: center;
-  justify-content: center;
   align-items: center;
   justify-items: center;
   
