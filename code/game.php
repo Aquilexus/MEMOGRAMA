@@ -98,6 +98,13 @@ function createBoard(){
     }
 }
 
+function prepareCookies(){
+    global $players;
+    
+    setcookie("players",$players);
+    setcookie("scores");
+}
+
 
 ?>
 

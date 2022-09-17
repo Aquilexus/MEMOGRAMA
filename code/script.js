@@ -29,7 +29,11 @@ var interval;
 
 
 function getScore(){
-    return p1_score;
+    var scores = [];
+    for (let i = 0; i < num_players; i++) {
+        const score = scores[i];
+    }
+    return scores;
 }
 
 function setTime(time){
@@ -404,3 +408,5 @@ function check_ended() {
         
     }
 }
+
+
