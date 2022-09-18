@@ -138,10 +138,9 @@ playerCookies();
     </div><!--Nota : si quitamos este div se descolocan los botones-->
         <div id="bottom">
             <div id="buttons">
-                <form id="fame" action="hallOfFame.php" method="get" enctype="multipart/form-data">
+                <form id="fame" action="hallOfFame.php" method="post">
 
-                <imput type="hidden" name="test" value=<?echo $cant_players?> ></imput>
-                <imput type="Submit" value="enviar"></imput>
+                <imput type="submit" name="test" value="17" id="prueba">
                 </form>
             </div>
         </div>

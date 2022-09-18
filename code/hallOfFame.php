@@ -1,8 +1,10 @@
 <?php
 
-
-    $score = $_GET["test"];
-    echo($score[0]);
+    if (isset($_POST["test"])) {
+        $score = $_POST["test"];
+    echo($score);
+    }
+    
 
 /*
     $jugador = [];
