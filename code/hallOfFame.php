@@ -1,6 +1,73 @@
 <?php
 
+
+    $score = $_GET["test"];
+    echo($score[0]);
+
+/*
+    $jugador = [];
+
+
+    if (isset($_COOKIE['jugador'])) {
+        $players = json_decode($_COOKIE['players']);
+        for ($i=0; $i < count($players); $i++) { 
+            array_push($jugador,$players[$i]);
+            echo $players[$i];
+        }
+        setcookie("jugador",json_encode($jugador));
+    }else{
+        $players = json_decode($_COOKIE['players']);
+        //$jugador = [];
+        for ($i=0; $i < count($players); $i++) { 
+            array_push($jugador,$players[$i]);
+        }
+        setcookie("jugador",json_encode($jugador));
+    }
+
+
+
+
+    $scores = [];
+    if (isset($_COOKIE['score'])) {
+        
+    for ($i=0; $i < count($players); $i++) { 
+        $score = json_decode($_COOKIE['score'.$i]);
+        array_push($scores,$score);
+    }
+    }
+    */
+    
+    //$table = array_combine($players,$scores);
+    //arsort($table);
+
+
+
+
+
+
+
+function buildTable(){
+    
+    global $table;
+    
+    foreach ($table as $player => $score) {
+        echo "<tr>";
+        echo "<td>";
+        echo $player;
+        echo "</td>";
+        echo "<td class=\"score\">";
+        echo $score;
+        echo "</td>";
+        echo "</tr>";
+    }
+        
+    
+    
+}
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -17,14 +84,7 @@
         <div class="middle">
             <div class="table">
                 <table>
-                    <tr>
-                        <td class="palyer_name">
-                            test
-                        </td>
-                        <td class="score">
-                            120
-                        </td>
-                    </tr>
+                    <?php //buildTable()?>
                 </table>
             </div>
         </div>

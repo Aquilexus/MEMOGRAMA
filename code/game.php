@@ -98,14 +98,13 @@ function createBoard(){
     }
 }
 
-function prepareCookies(){
+function playerCookies(){
     global $players;
-    
-    setcookie("players",$players);
-    setcookie("scores");
+    $json = json_encode($players);
+    setcookie("players",$json);
 }
 
-
+playerCookies();
 ?>
 
 <!DOCTYPE html>
@@ -139,8 +138,10 @@ function prepareCookies(){
     </div><!--Nota : si quitamos este div se descolocan los botones-->
         <div id="bottom">
             <div id="buttons">
-                <form id="fame" action="hallOfFame.php">
+                <form id="fame" action="hallOfFame.php" method="get" enctype="multipart/form-data">
 
+                <imput type="hidden" name="test" value=<?echo $cant_players?> ></imput>
+                <imput type="Submit" value="enviar"></imput>
                 </form>
             </div>
         </div>
