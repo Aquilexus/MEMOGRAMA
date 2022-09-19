@@ -37,6 +37,7 @@ function createPlayer(){
         echo "<div id=\"p".($i+1)."\">";
         echo "<h2 id=\"name".($i+1)."\">" .  $players[$i] . "<h2 id=\"score".($i+1)."\">0</h2></h2>";
         echo "</div>";
+        
     }
 }
 //Funcion que duplica los nombres de $characters ej: Bennett, Bennett_dup
@@ -129,9 +130,8 @@ playerCookies($players);
 <script src="script.js"></script>
 <body>
     <div id="top">
-        <img id="title" src="../images/logo.png" alt="">
-    </div>
-    <div id="nav">
+        <h2 id="cronometro"></h2><!--cronometro que cuenta el tiempo total-->
+        <img id="title" src="../images/logo.png" alt="">  
     </div>
     <div class="main">
         <div id="player_score">
