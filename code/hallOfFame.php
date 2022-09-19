@@ -1,41 +1,25 @@
 <?php
 
-    $scores = json_decode($_COOKIE["scores"],true);
+    //$scores = json_decode($_COOKIE["scores"],true);
     $players = json_decode($_COOKIE["players"],true);
     
 
-/*
-    $jugador = [];
-
-
-    if (isset($_COOKIE['jugador'])) {
-        $players = json_decode($_COOKIE['players']);
-        for ($i=0; $i < count($players); $i++) { 
-            array_push($jugador,$players[$i]);
-            echo $players[$i];
+    $scores = json_decode($_POST["scores"],true);
+    
+    
+    if (isset($_COOKIE["scores"])) {
+        $cookie_scores = json_decode($_COOKIE["scores"],true);
+        for ($i=0; $i < count($cookie_scores); $i++) { 
+            array_push($scores,$cookie_scores[$i]);
         }
-        setcookie("jugador",json_encode($jugador));
-    }else{
-        $players = json_decode($_COOKIE['players']);
-        //$jugador = [];
-        for ($i=0; $i < count($players); $i++) { 
-            array_push($jugador,$players[$i]);
-        }
-        setcookie("jugador",json_encode($jugador));
+        $json = json_encode($scores);
+        setcookie("scores",$json);
+    }else {
+        $json = json_encode($scores);
+        setcookie("scores",$json);
     }
 
-
-
-
-    $scores = [];
-    if (isset($_COOKIE['score'])) {
-        
-    for ($i=0; $i < count($players); $i++) { 
-        $score = json_decode($_COOKIE['score'.$i]);
-        array_push($scores,$score);
-    }
-    }
-    */
+   
     
     $table = array_combine($players,$scores);
     arsort($table);
@@ -53,10 +37,10 @@ function buildTable(){
     foreach ($table as $player => $score) {
         echo "<tr>";
         echo "<td>";
-        echo $player;
+        echo "Jugador: ".$player;
         echo "</td>";
         echo "<td class=\"score\">";
-        echo $score;
+        echo $score." Puntos";
         echo "</td>";
         echo "</tr>";
     }

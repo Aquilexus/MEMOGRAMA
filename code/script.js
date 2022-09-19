@@ -28,12 +28,24 @@ var game_ended=false;
 var interval;
 
 
+function getScores(){
+    var scores = [p1_score,p2_score,p3_score,p4_score];
+    
+    var builded_scores = []
+
+    for (let i = 0; i < num_players; i++) {
+         builded_scores.push(scores[i]);  
+    }
+
+    return JSON.stringify(builded_scores);
+}
+
 function cookie(){
     
     var scores = [p1_score,p2_score,p3_score,p4_score];
     
     var builded_scores = []
-    
+
     for (let i = 0; i < num_players; i++) {
          builded_scores.push(scores[i]);  
     }
@@ -410,13 +422,18 @@ function check_ended() {
         imput2.className="button";
         imput2.type="submit";
      butons.appendChild(imput2);
+        var hidden = document.createElement("input");
+        hidden.setAttribute("name","scores");
+        hidden.setAttribute("value",getScores());
+        hidden.setAttribute("type","hidden");
+        butons.appendChild(hidden);
        
 
 
 
         game_ended=true;
         clearInterval(interval);
-        cookie();
+        
         
     }
 }

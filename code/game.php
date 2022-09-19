@@ -98,13 +98,26 @@ function createBoard(){
     }
 }
 
-function playerCookies(){
-    global $players;
-    $json = json_encode($players);
-    setcookie("players",$json);
+function playerCookies($players){
+    
+
+
+    if (isset($_COOKIE["players"])) {
+        $cookie_players = json_decode($_COOKIE["players"],true);
+        for ($i=0; $i < count($cookie_players); $i++) { 
+            array_push($players,$cookie_players[$i]);
+        }
+        $json = json_encode($players);
+        setcookie("players",$json);
+    }else {
+        $json = json_encode($players);
+        setcookie("players",$json);
+    }
+
+    
 }
 
-playerCookies();
+playerCookies($players);
 ?>
 
 <!DOCTYPE html>
@@ -140,7 +153,6 @@ playerCookies();
             <div id="buttons">
                 <form id="fame" action="hallOfFame.php" method="post">
 
-                <imput type="hidden" name="test" value="17" id="prueba">
                 </form>
             </div>
         </div>
