@@ -1,9 +1,7 @@
 <?php
 
-    if (isset($_POST["test"])) {
-        $score = $_POST["test"];
-    echo($score);
-    }
+    $scores = json_decode($_COOKIE["scores"],true);
+    $players = json_decode($_COOKIE["players"],true);
     
 
 /*
@@ -39,8 +37,8 @@
     }
     */
     
-    //$table = array_combine($players,$scores);
-    //arsort($table);
+    $table = array_combine($players,$scores);
+    arsort($table);
 
 
 
@@ -86,7 +84,7 @@ function buildTable(){
         <div class="middle">
             <div class="table">
                 <table>
-                    <?php //buildTable()?>
+                    <?php buildTable()?>
                 </table>
             </div>
         </div>

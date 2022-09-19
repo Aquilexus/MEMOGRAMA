@@ -140,7 +140,7 @@ playerCookies();
             <div id="buttons">
                 <form id="fame" action="hallOfFame.php" method="post">
 
-                <imput type="submit" name="test" value="17" id="prueba">
+                <imput type="hidden" name="test" value="17" id="prueba">
                 </form>
             </div>
         </div>

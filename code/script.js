@@ -30,15 +30,15 @@ var interval;
 
 function cookie(){
     
-    var scores = [p1_score,p2_score,p3_score,p4_score]
+    var scores = [p1_score,p2_score,p3_score,p4_score];
     
     var builded_scores = []
+    
     for (let i = 0; i < num_players; i++) {
          builded_scores.push(scores[i]);  
     }
-
-    return JSON.stringify(builded_scores);
-
+    var json = JSON.stringify(builded_scores);
+    document.cookie = "scores="+json;
     
     
 
@@ -405,21 +405,18 @@ function check_ended() {
         butons=document.getElementById("fame")
         var imput2 = document.createElement("BUTTON");
         imput2.appendChild(document.createTextNode("Hall of Fame"));
-        //imput2.setAttribute("onclick", "location.reload();");
+        
         imput2.id = "hall_of_fame";
         imput2.className="button";
         imput2.type="submit";
      butons.appendChild(imput2);
-        /*var scores = document.createElement("imput");
-        scores.setAttribute("type","hidden");
-        scores.setAttribute("name","scores");
-        scores.setAttribute("value","17");
-        butons.appendChild(scores);*/
+       
 
 
 
         game_ended=true;
         clearInterval(interval);
+        cookie();
         
     }
 }
