@@ -28,6 +28,9 @@ if (isset($_GET["nom4"])){
 }
 
 
+
+
+
 //Funcion para crear los divs de cada jugador  
 function createPlayer(){
 
