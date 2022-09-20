@@ -1,12 +1,19 @@
 <?php
 
-    //$scores = json_decode($_COOKIE["scores"],true);
-    $players = json_decode($_COOKIE["players"],true);
+    if (isset($_GET["players"])) {
+         $players = json_decode($_GET["players"],true);
+    }else{
+        $players=[];
+    }
+   
+    if (isset($_GET["scores"])) {
+        $scores = json_decode($_GET["scores"],true);
+   }else{
+       $scores=[];
+   }
+    
     
 
-    $scores = json_decode($_POST["scores"],true);
-    
-    
     if (isset($_COOKIE["scores"])) {
         $cookie_scores = json_decode($_COOKIE["scores"],true);
         for ($i=0; $i < count($cookie_scores); $i++) { 
@@ -19,14 +26,24 @@
         setcookie("scores",$json);
     }
 
+    if (isset($_COOKIE["players"])) {
+        $cookie_players = json_decode($_COOKIE["players"],true);
+        for ($i=0; $i < count($cookie_players); $i++) { 
+            array_push($players,$cookie_players[$i]);
+        }
+        $json = json_encode($players);
+        setcookie("players",$json);
+    }else {
+        $json = json_encode($players);
+        setcookie("players",$json);
+    }
+
+
+
    
     
     $table = array_combine($players,$scores);
     arsort($table);
-
-
-
-
 
 
 
@@ -49,9 +66,6 @@ function buildTable(){
     
 }
 ?>
-
-
-
 
 
 <!DOCTYPE html>

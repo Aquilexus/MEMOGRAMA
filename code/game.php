@@ -98,9 +98,12 @@ function createBoard(){
     }
 }
 
+function getPlayers($players){
+    return json_encode($players);
+}
+
 function playerCookies($players){
     
-
 
     if (isset($_COOKIE["players"])) {
         $cookie_players = json_decode($_COOKIE["players"],true);
@@ -117,7 +120,7 @@ function playerCookies($players){
     
 }
 
-playerCookies($players);
+//playerCookies($players);
 ?>
 
 <!DOCTYPE html>
@@ -151,8 +154,8 @@ playerCookies($players);
     </div><!--Nota : si quitamos este div se descolocan los botones-->
         <div id="bottom">
             <div id="buttons">
-                <form id="fame" action="hallOfFame.php" method="post">
-
+                <form id="fame" action="hallOfFame.php" method="GET">
+                    <input type="hidden" name="players" value=<?echo getPlayers($players)?>>
                 </form>
             </div>
         </div>
