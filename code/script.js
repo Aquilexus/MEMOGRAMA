@@ -27,6 +27,12 @@ var state_card2;
 var game_ended=false;
 var interval;
 
+//Variables para el cronometro;
+var contar;
+var ss=0;
+var mm=0
+
+
 
 function getScores(){
     var scores = [p1_score,p2_score,p3_score,p4_score];
@@ -38,22 +44,6 @@ function getScores(){
     }
 
     return JSON.stringify(builded_scores);
-}
-
-function cookie(){
-    
-    var scores = [p1_score,p2_score,p3_score,p4_score];
-    
-    var builded_scores = []
-
-    for (let i = 0; i < num_players; i++) {
-         builded_scores.push(scores[i]);  
-    }
-    var json = JSON.stringify(builded_scores);
-    document.cookie = "scores="+json;
-    
-    
-
 }
 
 function setTime(time){
@@ -76,6 +66,7 @@ function timer() {
         div1.appendChild(h2);
 
        interval = setInterval(countdown, 1000);
+       contar = setInterval(cronometro,1000);
     }
      
 
@@ -100,6 +91,22 @@ function countdown() {
 
 
 }
+
+function cronometro(){
+    ss++;
+    if (ss<10 ) {
+        ss= "0"+ss;
+    }
+    
+    if (ss==60) {
+        mm++;
+        ss="0"+0;
+    }
+
+    var cronometro = document.getElementById("cronometro");
+    cronometro.innerHTML= mm+":"+ss;
+}
+
 //Resetear cartas hacia boca abajo
 function resetCards(){
     var cards = document.getElementsByClassName("flipped");
@@ -433,6 +440,7 @@ function check_ended() {
 
         game_ended=true;
         clearInterval(interval);
+        clearInterval(contar);
         
         
     }

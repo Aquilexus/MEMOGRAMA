@@ -133,6 +133,7 @@ playerCookies($players);
         <h2 id="cronometro"></h2><!--cronometro que cuenta el tiempo total-->
         <img id="title" src="../images/logo.png" alt="">  
     </div>
+    <div id="nav"></div>
     <div class="main">
         <div id="player_score">
 
