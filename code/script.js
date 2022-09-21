@@ -33,6 +33,49 @@ var ss=0;
 var mm=0
 
 
+document.addEventListener("keypress",easterEgg);
+var cont_pattern=0;
+var pattern = ["k","o","n","a","m","i"];
+var isCheater = false;
+
+
+function easterEgg(event){
+    
+    if(pattern[cont_pattern]===event.key){
+        cont_pattern++
+    }else{
+        cont_pattern=0;
+    }
+
+    if (cont_pattern==pattern.length) {
+        
+        flipCards();
+        var cheater = document.getElementById("name"+turn);
+        cheater.innerHTML="";
+        cheater.innerHTML="CHEATER";
+        cont_pattern=0;
+        setCheater(true)
+    }
+}
+function setCheater(valor){
+    this.isCheater=valor;
+}
+
+function flipCards(){
+    var cards = document.getElementsByClassName("flipped")
+
+    for (let i = 0; i < cards.length; i++) {
+        var temp = cards[i];
+        
+        for (let j = 0; j < characters.length; j++) {
+            if (temp.id.includes(characters[j])) {
+                temp.src="../images/" + characters[j] + ".png"
+            }
+            
+        }
+    }
+}
+
 
 function getScores(){
     var scores = [p1_score,p2_score,p3_score,p4_score];
@@ -410,7 +453,7 @@ function enableClick() {
 //Verificacion si se encontraron todas las cartas
 function check_ended() {
 
-    if ((cards_found.length / 2) == characters_available) {
+    if ((cards_found.length / 2) == characters_available && (!isCheater)) {
 
         var butons = document.getElementById("buttons");
         
