@@ -41,6 +41,19 @@
     }
 
 
+    //Si un jugador ha sacado una puntuacion superior a su partida anterior, la puntuacion se actualiza
+    for ($i=0; $i < count($players); $i++) { 
+        for ($j=0; $j < count($players); $j++) { 
+            
+            if ($players[$i]==$players[$j]) {
+                if ($scores[$i]>$scores[$j]) {
+                    $scores[$j]=$scores[$i];
+                }elseif ($scores[$j]>$scores[$i]) {
+                    $scores[$i]=$scores[$j];
+                }
+            }
+        }
+    }
 
    
     //Combinamos en una tabla asociativa los jugadores con su puntuacion
