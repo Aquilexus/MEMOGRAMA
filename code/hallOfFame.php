@@ -1,5 +1,7 @@
 <?php
 
+
+//Comprovamos si existe algo en el formulario de la pagina anterior
     if (isset($_GET["players"])) {
          $players = json_decode($_GET["players"],true);
     }else{
@@ -13,7 +15,7 @@
    }
     
     
-
+   //Actualizamos las cookies, si es la primera vez que accedemos a esta pagina, creamos la cookie
     if (isset($_COOKIE["scores"])) {
         $cookie_scores = json_decode($_COOKIE["scores"],true);
         for ($i=0; $i < count($cookie_scores); $i++) { 
@@ -41,15 +43,16 @@
 
 
    
-    
+    //Combinamos en una tabla asociativa los jugadores con su puntuacion
     $table = array_combine($players,$scores);
+    //Organizamos la tabla por la puntuacion mas alta
     arsort($table);
 
 
-
-function buildTable(){
+//Creamos la tabla para el html
+function buildTable($table){
     
-    global $table;
+    
     
     foreach ($table as $player => $score) {
         echo "<tr>";
@@ -82,7 +85,7 @@ function buildTable(){
         <div class="middle">
             <div class="table">
                 <table>
-                    <?php buildTable()?>
+                    <?php buildTable($table)?>
                 </table>
             </div>
         </div>

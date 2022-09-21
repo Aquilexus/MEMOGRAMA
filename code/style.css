@@ -1,10 +1,8 @@
-:root{
-  --test: calc(80vw);
-}
 
+/*IMPORTACION DE FUENTE DE GOGLE FONTS*/
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
 
-
+/*FONDO*/
 body {
   background-image: url(../images/background.png);
   background-size:cover;
@@ -13,6 +11,7 @@ body {
 
 }
 
+/*ESTILO NOMBRE DE LOS JUGADORES*/
 h2 {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding-left: 20px;
@@ -38,7 +37,8 @@ background-repeat: no-repeat;
 width: 200px;
 }
 
-
+/*******************************/
+/*ESTILO DEL TITULO DE LA PAGINA*/
 #title {
   text-align: center;
 
@@ -52,7 +52,7 @@ width: 200px;
 }
 
 
-
+/*ESTILO DE TODAS LAS CARTAS*/
 .ok,.flipped {
   display: block;
   width: 100px;
@@ -63,18 +63,17 @@ width: 200px;
   
 }
 
+/*ESTILO DE LAS CARTAS ENCONTRADAS*/
 .ok{
   border: 3px solid rgb(175, 24, 5);
   border-radius: 10px;
 }
 
-
-
-
-
+/*ENGLOBA CRONOMETRO Y TITULO*/
 #top {
   display: flex;
 }
+
 
 #cronometro{
   display: grid;
@@ -87,11 +86,11 @@ width: 200px;
   padding-left: 0px;
   
 }
-
+/*ENGLOBA A LOS JUGADORES*/
 .main{
   display: flex;
 }
-
+/*ENGLOBA LAS CARTAS*/
 #middle {
   display: inline-flex;
   width: 71%;
@@ -105,6 +104,7 @@ width: 200px;
   /*margin-right: 110px;*/
 
 }
+/*ENGLOBA LOS BOTONES Y EL FORMULARIO*/
 #bottom{
   display: flex;
   justify-content: center
@@ -145,6 +145,7 @@ width: 200px;
   text-align: center;
 }
 
+/*TEMPORIZADOR*/
 #timer{
   display: grid;
   width: 60px;
@@ -161,7 +162,7 @@ width: 200px;
   font-family: 'Bungee Spice', cursive;
   font-size: 45px;
 }
-
+/*FORMULARIO*/
 #fame{
   display: inline-block;
 }

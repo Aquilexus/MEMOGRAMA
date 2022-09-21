@@ -101,30 +101,11 @@ function createBoard(){
         echo "<h2>" . "La cantidad de cartas debe de ser divisible por 2" . "</h2>";
     }
 }
-
+//Esta funcion envia una array de jugadores en el formulario
 function getPlayers($players){
     return json_encode($players);
 }
 
-function playerCookies($players){
-    
-
-    if (isset($_COOKIE["players"])) {
-        $cookie_players = json_decode($_COOKIE["players"],true);
-        for ($i=0; $i < count($cookie_players); $i++) { 
-            array_push($players,$cookie_players[$i]);
-        }
-        $json = json_encode($players);
-        setcookie("players",$json);
-    }else {
-        $json = json_encode($players);
-        setcookie("players",$json);
-    }
-
-    
-}
-
-//playerCookies($players);
 ?>
 
 <!DOCTYPE html>
@@ -170,6 +151,7 @@ function playerCookies($players){
          setTurn(<?php echo $cant_players ?>)//Para inicializar la variable turn en JS 
          turn_rotation();//Sirve para aleatorizar la variable turn y rotar el turno de cada jugador
          setTime(<?php echo $_GET["time"] ?>)//Se inicializa la variable time que sirve determinar el tiempo de cada ronda
-         timer();//Funcion para crear el timer      
+         timer();//Funcion para crear el timer    
+         easterEgg(event);
     </script>
 </html>

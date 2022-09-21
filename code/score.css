@@ -1,10 +1,12 @@
+
+/*Importamos fuentes de google fonts*/
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Russo+One&display=swap');
 
 *{
     font-family: 'Russo One', sans-serif;
 }
 
-
+/*SECCION DE ARRIBA*/
 body{
     background-image: url(../images/fame_bg.jpg);
     background-repeat: no-repeat;
@@ -32,15 +34,12 @@ body{
     margin-top: -50px;
     border-width: 4px;
     border-radius: 20px;
-    /*border-style: solid;
-    /*border-image: linear-gradient(to bottom, #360033, #0b8793) 1;*/
     box-shadow: 0px 0px 10px 5px rgba(255, 184, 53, 0.432);
     box-sizing: border-box;
 }
 
 .table{
     width: 100%;
-    
     margin: 2rem;
     margin-top: 3rem;
     box-sizing: border-box;

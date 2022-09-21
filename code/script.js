@@ -1,133 +1,148 @@
 
 //alert("Fet per en \"Paul Soual\" 2n de DAW");
 
-var time;
-var time_saved;
+var time;//tiempo actual que cuenta atras
+var time_saved;//tiempo definido por el usuario en el formulario
 
-const characters= ["Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou"];
+const characters = ["Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou"];
 
-var card1 = "";
-var card2 = "";
-var turn = 1;
+var card1 = "";//nombre de la primera carta
+var card2 = "";//nombre de la segunda carta
+var turn = 1;//contador de turnos ej 1 = turno del jugador 1
 
-var isPoint = false;
-//var num_players;
-var p1_score = 0;
+var isPoint = false;//booleana para saber si jugador ha marcado punto
+
+var p1_score = 0;//puntuacion jugador 1 etc..
 var p2_score = 0;
 var p3_score = 0;
 var p4_score = 0;
 
 
-var cards_found = [];
-var counter_cards_found = 0;
+var cards_found = [];//array de cartas encontradas (incluye las cartas duplicadas)
+var counter_cards_found = 0;//contador de cartas encontradas
 
-var state_card1;
+var state_card1;//document.getelementById (para trabajar con el estado de la carta si esta girada o no)
 var state_card2;
 
-var game_ended=false;
-var interval;
+var game_ended = false;//Cuando la partida esta acabada
+var interval;//Para el temporizador 
 
 //Variables para el cronometro;
-var contar;
-var ss=0;
-var mm=0
+var contar;//para definir el interval del cronometro
+var ss = 0;//segundos
+var mm = 0//minutos
 
 
-document.addEventListener("keypress",easterEgg);
-var cont_pattern=0;
-var pattern = ["k","o","n","a","m","i"];
-var isCheater = false;
+//Escuchamos al teclado y mandamos el evento a la funcion
+document.addEventListener("keypress", easterEgg);
+var cont_pattern = 0;//contador de ocurrencias
+var pattern = ["k", "o", "n", "a", "m", "i"];//codigo trampa :-)
+var isCheater = false;//es tramposo ?
 
 
-function easterEgg(event){
-    
-    if(pattern[cont_pattern]===event.key){
+//Easter egg con codigo secroteo
+function easterEgg(event) {
+
+    //Determinamos las ocurrencias seguidas entre teclado y pattern
+    if (pattern[cont_pattern] === event.key) {
         cont_pattern++
-    }else{
-        cont_pattern=0;
+    } else {//Si se falla una letra reiniciamos 
+        cont_pattern = 0;
     }
 
-    if (cont_pattern==pattern.length) {
-        
-        flipCards();
-        var cheater = document.getElementById("name"+turn);
-        cheater.innerHTML="";
-        cheater.innerHTML="CHEATER";
-        cont_pattern=0;
-        setCheater(true)
+    //Si hemos encertado el pattern 
+    if (cont_pattern == pattern.length) {
+
+
+        flipCards();//Giramos todas las cartas
+        var cheater = document.getElementById("name" + turn);
+        cheater.innerHTML = "";
+        cheater.innerHTML = "CHEATER";//Y cambiamos el nombre del jugador a "CHEATER"
+        cont_pattern = 0;
+        setCheater(true)//Cambiamos la booleana a true porque es tramposo
     }
 }
-function setCheater(valor){
-    this.isCheater=valor;
+
+function setCheater(valor) {
+    this.isCheater = valor;
 }
 
-function flipCards(){
+//Funcion que gira todas las cartas que tengan como clase "flipped"
+function flipCards() {
     var cards = document.getElementsByClassName("flipped")
 
+    //Repasamos todas las cartas 
     for (let i = 0; i < cards.length; i++) {
         var temp = cards[i];
-        
+
+        //Y comparamos la id con los personajes disponibles 
         for (let j = 0; j < characters.length; j++) {
+            //Si la id es igual al personaje giramos carta
             if (temp.id.includes(characters[j])) {
-                temp.src="../images/" + characters[j] + ".png"
+                temp.src = "../images/" + characters[j] + ".png"
             }
-            
+
         }
     }
 }
 
+//Funcion que devuelve todas las puntuaciones en funcion de la cantidad de jugadores
+function getScores() {
+    var scores = [p1_score, p2_score, p3_score, p4_score];
 
-function getScores(){
-    var scores = [p1_score,p2_score,p3_score,p4_score];
-    
     var builded_scores = []
 
     for (let i = 0; i < num_players; i++) {
-         builded_scores.push(scores[i]);  
+        builded_scores.push(scores[i]);
     }
 
+    //Pasamos el array a string para mandarlo por formulario y actualizar cookie mas tarde
     return JSON.stringify(builded_scores);
 }
 
-function setTime(time){
-this.time = time;
-this.time_saved = time;
+
+//Inicializamos el tiempo de turno definido por jugador
+function setTime(time) {
+    this.time = time;
+    this.time_saved = time;
 }
 
 //Funcion que crea los divs para posicionar la cuenta atras
 function timer() {
 
-    if (time_saved != 0 ) {
+    if (time_saved != 0) {
         var top = document.getElementById("nav");
-        var div=document.createElement("div");
+        var div = document.createElement("div");
         div.id = "timer";
         top.prepend(div);
 
-        var div1=document.getElementById("timer");
-        var h2=document.createElement("h2");
-        h2.id="countdown";
+        var div1 = document.getElementById("timer");
+        var h2 = document.createElement("h2");
+        h2.id = "countdown";
         div1.appendChild(h2);
 
-       interval = setInterval(countdown, 1000);
-       contar = setInterval(cronometro,1000);
+        //Cada segundo repetimos la funcion definida
+        interval = setInterval(countdown, 1000);
+        contar = setInterval(cronometro, 1000);
     }
-     
 
-    
+
+
 }
 //Esta funcion actualiza los numeros del contador
 function countdown() {
-    
+
     var time_div = document.getElementById("countdown");
     time_div.innerHTML = "";
-    
+
+    //Cuando el tiempo llegue a - de 0 reseteamos tiempo, cambimos turno y reseteamos LA carta girada
     if (time < 0) {
         time = this.time_saved;
         turn++
         resetCards();
         turn_rotation();
     }
-    
+
 
     time_div.innerHTML = time;
     time--;
@@ -135,42 +150,48 @@ function countdown() {
 
 }
 
-function cronometro(){
+//Funcion que calcula el tiempo total del juego
+function cronometro() {
     ss++;
-    if (ss<10 ) {
-        ss= "0"+ss;
+    if (ss < 10) {
+        ss = "0" + ss;
     }
-    
-    if (ss==60) {
+
+    if (ss == 60) {
         mm++;
-        ss="0"+0;
+        ss = "0" + 0;
     }
 
     var cronometro = document.getElementById("cronometro");
-    cronometro.innerHTML= mm+":"+ss;
+    cronometro.innerHTML = mm + ":" + ss;
 }
 
 //Resetear cartas hacia boca abajo
-function resetCards(){
+function resetCards() {
     var cards = document.getElementsByClassName("flipped");
 
+    //Repasamos todas las cartas de clase flipped y las volvemos a girar
     for (let i = 0; i < cards.length; i++) {
-        
+
         var card = cards[i];
-        card.src="../images/card back.png";
+        card.src = "../images/card back.png";
     }
-    this.card1="";
-    this.card2="";
-    enableClick();
+    //Reseteamos los nombres de las cartas seleccionadas
+    this.card1 = "";
+    this.card2 = "";
+
+    enableClick();//Se reactiva el click a todas las cartas de classe flipped
 }
 
 //Determina quien empieza primero
-function setTurn(num_of_players){
-   turn = Math.floor(Math.random() * num_of_players+1);
+function setTurn(num_of_players) {
+    turn = Math.floor(Math.random() * num_of_players + 1);
 }
 
-//Esta funcion hace repetir la rotacion de cada jugador 
+//Esta funcion muestra a los jugadores a quien le toca modificando estilo del jugador actual y a los que no les toca 
 function turn_rotation() {
+
+    //Reset de contador de turnos
     if (turn > num_players) {
         turn = 1;
     }
@@ -200,7 +221,7 @@ function updateScore() {
     switch (turn) {
         case 1: p1_score++;
             var score = document.getElementById("score1");
-            score.innerText = "";
+            score.innerText = "";//importante borrar la puntuacion anterior y actualizar por la nueva
             score.innerText = p1_score;
 
             break;
@@ -232,7 +253,7 @@ function updateScore() {
 }
 
 
-//Esta funcion es para el formulario. Lo que hace es generar imputs para los jugadores en funcion del valor que retorna el select
+//Esta funcion modifica los imputs text del formulario en funcion de la cantidad de jugadores escogido
 function set_PlayerName(cant) {
 
     num_players = cant;
@@ -273,7 +294,7 @@ function set_PlayerName(cant) {
 function flip(nombre) {
 
 
-
+    //Cargamos un sonido
     var flip_sound = new Audio("../sound/Card-flip-sound-effect.mp3")
 
 
@@ -299,15 +320,15 @@ function flip(nombre) {
     if (card1 == "") {
         card1 = nombre;
         state_card1 = state_card;
-        //Cada vez que le damos click a una carta desactivamos el evento 
+        //Cada vez que le damos click a una carta desactivamos el evento de esta carta
         state_card1.removeAttribute("onclick");
     } else {
         state_card2 = state_card;
         state_card2.removeAttribute("onclick")
         card2 = nombre;
-        setTimeout(check_cards, 500);
+        setTimeout(check_cards, 500);//timout para dejar al jugador ver la segunda carta durante un instante
         setTimeout(check_ended, 1000);
-        removeClick();
+        removeClick();//Funcion que desactiva el click de las otras cartas mientras se comprueba si las 2 cartas
 
 
     }
@@ -317,6 +338,7 @@ function flip(nombre) {
 //Esta funcion comprueba si las cartas son iguales en funcion de su id en HTML
 function check_cards() {
 
+    //Para saber cual carta tiene la extension _dup
     var card1_dup = false;
     var card2_dup = false;
 
@@ -419,6 +441,7 @@ function check_cards() {
 
     }
 
+    //Actualizamos el turno del jugador y resetamos los nombres de carta1 y 2
     turn_rotation();
     card1 = "";
     card2 = "";
@@ -451,42 +474,56 @@ function enableClick() {
 }
 
 //Verificacion si se encontraron todas las cartas
+//Generacion de los botones nueva partida y hall of fame
 function check_ended() {
 
-    if ((cards_found.length / 2) == characters_available && (!isCheater)) {
+    if ((cards_found.length / 2) == characters_available) {
+        game_ended = true;
+    }
+    if (game_ended && (!isCheater)) {
 
         var butons = document.getElementById("buttons");
-        
+
         var imput = document.createElement("BUTTON");
         imput.appendChild(document.createTextNode("Nueva Partida"));
-        imput.setAttribute("onclick", "location.reload();");
+        imput.setAttribute("onclick", "window.history.go(-1);");
         imput.id = "new_game";
-        imput.className="button"
-     butons.prepend(imput);
+        imput.className = "button"
+        butons.prepend(imput);
 
-        butons=document.getElementById("fame")
+        butons = document.getElementById("fame")
         var imput2 = document.createElement("BUTTON");
         imput2.appendChild(document.createTextNode("Hall of Fame"));
-        
+
         imput2.id = "hall_of_fame";
-        imput2.className="button";
-        imput2.type="submit";
-     butons.appendChild(imput2);
+        imput2.className = "button";
+        imput2.type = "submit";
+        butons.appendChild(imput2);
         var hidden = document.createElement("input");
-        hidden.setAttribute("name","scores");
-        hidden.setAttribute("value",getScores());
-        hidden.setAttribute("type","hidden");
+        hidden.setAttribute("name", "scores");
+        hidden.setAttribute("value", getScores());
+        hidden.setAttribute("type", "hidden");
         butons.appendChild(hidden);
+
+
        
 
+    }
+    if (isCheater && game_ended) {
+        alert("NO TE MERECES TENER TU NOMBRE EN EL SALON DE LA FAMA !");
+        alert("TRAMPOSO !")
+        alert("ESCORIA !");
 
+    }
 
-        game_ended=true;
+    if (game_ended) {
+        //Paramos los temporizadores
         clearInterval(interval);
         clearInterval(contar);
-        
-        
     }
+
+
+
 }
 
 
