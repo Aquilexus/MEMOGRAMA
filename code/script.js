@@ -17,6 +17,11 @@ var p2_score = 0;
 var p3_score = 0;
 var p4_score = 0;
 
+var tempo1 = 0;
+var tempo2 = 0;
+var tempo3 = 0;
+var tempo4 = 0;
+
 
 var cards_found = [];//array de cartas encontradas (incluye las cartas duplicadas)
 var counter_cards_found = 0;//contador de cartas encontradas
@@ -34,7 +39,7 @@ var mm = 0//minutos
 
 
 //Escuchamos al teclado y mandamos el evento a la funcion
-document.addEventListener("keypress", easterEgg,false);
+document.addEventListener("keypress", easterEgg, false);
 var cont_pattern = 0;//contador de ocurrencias
 var pattern = ["k", "o", "n", "a", "m", "i"];//codigo trampa :-)
 var isCheater = false;//es tramposo ?
@@ -117,6 +122,15 @@ function getScores() {
     return JSON.stringify(builded_scores);
 }
 
+function getTimers() {
+    var timers =[tempo1,tempo2,tempo3,tempo4];
+    var builded_timers = [];
+    for (let i = 0; i < num_of_players; i++) {
+        builded_timers.push[timers[i]];  
+    }
+    return JSON.stringify(builded_timers);
+}
+
 
 //Inicializamos el tiempo de turno definido por jugador
 function setTime(time) {
@@ -160,12 +174,61 @@ function countdown() {
         turn_rotation();
     }
 
+    var time_player = document.getElementById("tempo" + turn);
+
+
 
     time_div.innerHTML = time;
     time--;
 
 
+    switch (turn) {
+        case 1:
+            var temp_str =  toMinutes(tempo1)+":"+toSeconds(tempo1);
+            time_player.innerHTML = "";
+            time_player.innerHTML = temp_str;
+            tempo1++;
+            break;
+        case 2:
+            var temp_str =  toMinutes(tempo2)+":"+toSeconds(tempo2);
+            time_player.innerHTML = "";
+            time_player.innerHTML = temp_str;
+            tempo2++;
+            break;
+        case 3:
+            var temp_str =  toMinutes(tempo3)+":"+toSeconds(tempo3);
+            time_player.innerHTML = "";
+            time_player.innerHTML = temp_str;
+            tempo3++;
+            break;
+        case 4:
+            var temp_str =  toMinutes(tempo4)+":"+toSeconds(tempo4);
+            time_player.innerHTML = "";
+            time_player.innerHTML = temp_str;
+            tempo4++;
+            break;
+    }
 }
+
+
+function toSeconds(time) {
+
+   
+    let extraSeconds = time % 60;
+   
+    extraSeconds = extraSeconds < 10 ? "0" + extraSeconds : extraSeconds;
+
+    
+    return extraSeconds.toString();
+
+}
+
+function toMinutes(time){
+    let minutes = Math.floor(time / 60);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    return minutes.toString();
+}
+
 
 //Funcion que calcula el tiempo total del juego
 function cronometro() {
@@ -178,6 +241,7 @@ function cronometro() {
         mm++;
         ss = "0" + 0;
     }
+
 
     var cronometro = document.getElementById("cronometro");
     cronometro.innerHTML = mm + ":" + ss;
@@ -511,16 +575,22 @@ function check_ended() {
         butons = document.getElementById("fame")
         var imput2 = document.createElement("BUTTON");
         imput2.appendChild(document.createTextNode("Hall of Fame"));
-
         imput2.id = "hall_of_fame";
         imput2.className = "button";
         imput2.type = "submit";
         butons.appendChild(imput2);
+
         var hidden = document.createElement("input");
         hidden.setAttribute("name", "scores");
         hidden.setAttribute("value", getScores());
         hidden.setAttribute("type", "hidden");
         butons.appendChild(hidden);
+
+        var hidden2 = document.createElement("input");
+        hidden2.setAttribute("name","timers");
+        hidden2.setAttribute("value",getTimers());
+        hidden2.setAttribute("type","hidden");
+        butons.appendChild(hidden2);
 
 
 
