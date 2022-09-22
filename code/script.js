@@ -4,7 +4,7 @@
 var time;//tiempo actual que cuenta atras
 var time_saved;//tiempo definido por el usuario en el formulario
 
-const characters = ["Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou"];
+var characters = [];
 
 var card1 = "";//nombre de la primera carta
 var card2 = "";//nombre de la segunda carta
@@ -34,13 +34,11 @@ var mm = 0//minutos
 
 
 //Escuchamos al teclado y mandamos el evento a la funcion
-document.addEventListener("keypress", easterEgg);
+document.addEventListener("keypress", easterEgg,false);
 var cont_pattern = 0;//contador de ocurrencias
 var pattern = ["k", "o", "n", "a", "m", "i"];//codigo trampa :-)
 var isCheater = false;//es tramposo ?
-
-
-//Easter egg con codigo secroteo
+//Easter egg con codigo secreto
 function easterEgg(event) {
 
     //Determinamos las ocurrencias seguidas entre teclado y pattern
@@ -49,6 +47,7 @@ function easterEgg(event) {
     } else {//Si se falla una letra reiniciamos 
         cont_pattern = 0;
     }
+    event.stopImmediatePropagation();
 
     //Si hemos encertado el pattern 
     if (cont_pattern == pattern.length) {
@@ -62,6 +61,24 @@ function easterEgg(event) {
         setCheater(true)//Cambiamos la booleana a true porque es tramposo
     }
 }
+
+function setCharacters(value) {
+
+    switch (value) {
+        case 1:
+            //characters = ["Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou"];
+            this.characters.push("Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou");
+            break;
+        case 2:
+            this.characters.push("barbara_chibi", "fischil_chibi", "gorou_chibi", "heizou_chibi", "hutao_chibi", "kazuha_chibi", "kokomi_chibi", "paimon_chibi", "tartaglia_chibi", "venti_chibi", "yanfei_chibi", "yoimiya_chibi");
+            break;
+
+        default:
+            break;
+    }
+}
+
+
 
 function setCheater(valor) {
     this.isCheater = valor;
@@ -506,7 +523,7 @@ function check_ended() {
         butons.appendChild(hidden);
 
 
-       
+
 
     }
     if (isCheater && game_ended) {

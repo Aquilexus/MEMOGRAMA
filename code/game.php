@@ -4,8 +4,21 @@ $cant_players = isset($_GET["players_cant"]) ? $_GET["players_cant"] : 1;
 $players = array();
 $x = isset($_GET["x"]) ? $_GET["x"] : 2;
 $y = isset($_GET["y"]) ? $_GET["y"] : 2;
+$check = $_GET["check"];
+
 //Array de posibles personages
-$characters = array("Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou");
+switch ($check) {
+    case '1':
+        $characters = array("Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou");
+        break;
+    case '2': 
+        $characters = array("barbara_chibi", "fischil_chibi", "gorou_chibi", "heizou_chibi", "hutao_chibi", "kazuha_chibi", "kokomi_chibi", "paimon_chibi", "tartaglia_chibi", "venti_chibi", "yanfei_chibi", "yoimiya_chibi");   
+        break;    
+    default:
+        $characters = array("Fischl", "Bennett", "Keqing", "Lisa", "Mona", "Ningguang", "Noelle", "Sucrose", "Venti", "Xiangling", "Xingqiu", "Beidou");
+        break;
+}
+
 //Array que almacenará los personajes + personajes duplicados ej: Benett, Benett_dup
 $characters_duplicate = array();
 //Comprovacion si existen los jugadoeres para asignar variable y añadirlo dinamicamente en el array
@@ -116,6 +129,9 @@ function getPlayers($players){
     <script src="script.js"></script>
 </head>
 <script src="script.js"></script>
+<script>
+    setCharacters(<?php echo $check?>);
+</script>
 <body>
     <div id="top">
         <h2 id="cronometro"></h2><!--cronometro que cuenta el tiempo total-->
@@ -154,5 +170,6 @@ function getPlayers($players){
          setTime(<?php echo $_GET["time"] ?>)//Se inicializa la variable time que sirve determinar el tiempo de cada ronda
          timer();//Funcion para crear el timer    
          easterEgg(event);
+         
     </script>
 </html>
