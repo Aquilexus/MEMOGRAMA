@@ -14,7 +14,8 @@
        $scores=[];
    }
     
-    
+    $test =json_decode($_GET["timers"]);
+   print_r($test);
    //Actualizamos las cookies, si es la primera vez que accedemos a esta pagina, creamos la cookie
     if (isset($_COOKIE["scores"])) {
         $cookie_scores = json_decode($_COOKIE["scores"],true);

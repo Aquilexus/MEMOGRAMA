@@ -125,8 +125,9 @@ function getScores() {
 function getTimers() {
     var timers =[tempo1,tempo2,tempo3,tempo4];
     var builded_timers = [];
-    for (let i = 0; i < num_of_players; i++) {
-        builded_timers.push[timers[i]];  
+
+    for (let i = 0; i < num_players; i++) {
+        builded_timers.push(timers[i]);  
     }
     return JSON.stringify(builded_timers);
 }
