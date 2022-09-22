@@ -106,6 +106,7 @@ function getPlayers($players){
     return json_encode($players);
 }
 
+
 ?>
 
 <!DOCTYPE html>
