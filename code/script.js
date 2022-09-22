@@ -593,9 +593,6 @@ function check_ended() {
         hidden2.setAttribute("type","hidden");
         butons.appendChild(hidden2);
 
-
-
-
     }
     if (isCheater && game_ended) {
         alert("NO TE MERECES TENER TU NOMBRE EN EL SALON DE LA FAMA !");
