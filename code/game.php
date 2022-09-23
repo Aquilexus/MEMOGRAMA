@@ -50,8 +50,8 @@ function createPlayer(){
     global $players;
 
     for ($i=0; $i <count($players); $i++) { 
-        echo "<div id=\"p".($i+1)."\">";
-        echo "<h2 id=\"name".($i+1)."\">" .  $players[$i] . "<h2 id=\"score".($i+1)."\">0</h2><h2 id=\"tempo".($i+1)."\">0</h2></h2>";
+        echo "<div class=\"player\" id=\"p".($i+1)."\">";
+        echo "<h2 class=\"name\" id=\"name".($i+1)."\">" .  $players[$i] . "<h2 class=\"score\" id=\"score".($i+1)."\">0</h2><h2 class=\"tempo\" id=\"tempo".($i+1)."\">00:00</h2></h2>";
         echo "</div>";
         
     }

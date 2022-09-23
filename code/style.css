@@ -90,6 +90,16 @@ width: 200px;
 .main{
   display: flex;
 }
+.name{
+  margin-bottom: 5px;
+}
+.score,.tempo{
+  margin-top: 5px;
+  display: inline-block;
+}
+.score{
+  margin-right: 40px;
+}
 /*ENGLOBA LAS CARTAS*/
 #middle {
   display: inline-flex;
@@ -99,11 +109,10 @@ width: 200px;
 
 #player_score {
   display: inline-flex;
-  
   flex-direction: column;
-  /*margin-right: 110px;*/
-
 }
+
+
 /*ENGLOBA LOS BOTONES Y EL FORMULARIO*/
 #bottom{
   display: flex;

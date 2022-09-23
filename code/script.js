@@ -17,10 +17,10 @@ var p2_score = 0;
 var p3_score = 0;
 var p4_score = 0;
 
-var tempo1 = 0;
-var tempo2 = 0;
-var tempo3 = 0;
-var tempo4 = 0;
+var tempo1 = 1;
+var tempo2 = 1;
+var tempo3 = 1;
+var tempo4 = 1;
 
 
 var cards_found = [];//array de cartas encontradas (incluye las cartas duplicadas)
@@ -188,25 +188,25 @@ function countdown() {
             var temp_str =  toMinutes(tempo1)+":"+toSeconds(tempo1);
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
-            tempo1++;
+            
             break;
         case 2:
             var temp_str =  toMinutes(tempo2)+":"+toSeconds(tempo2);
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
-            tempo2++;
+            
             break;
         case 3:
             var temp_str =  toMinutes(tempo3)+":"+toSeconds(tempo3);
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
-            tempo3++;
+            
             break;
         case 4:
             var temp_str =  toMinutes(tempo4)+":"+toSeconds(tempo4);
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
-            tempo4++;
+            
             break;
     }
 }
@@ -244,6 +244,10 @@ function cronometro() {
     }
 
 
+    tempo1++;
+    tempo2++;
+    tempo3++;
+    tempo4++;
     var cronometro = document.getElementById("cronometro");
     cronometro.innerHTML = mm + ":" + ss;
 }
