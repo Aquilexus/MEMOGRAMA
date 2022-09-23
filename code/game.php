@@ -133,6 +133,11 @@ function getPlayers($players){
     setCharacters(<?php echo $check?>);
 </script>
 <body>
+<script>
+        if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
     <div id="top">
         <h2 id="cronometro"></h2><!--cronometro que cuenta el tiempo total-->
         <img id="title" src="../images/logo.png" alt="">  

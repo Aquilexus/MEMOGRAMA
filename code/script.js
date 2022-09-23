@@ -607,8 +607,9 @@ function check_ended() {
         clearInterval(contar);
     }
 
-
-
 }
+
+    
+
 
 
