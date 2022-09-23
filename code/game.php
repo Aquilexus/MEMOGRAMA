@@ -147,7 +147,7 @@ function getPlayers($players){
         <div id="player_score">
 
             <!--Aquí es donde se generan los bloques con el nombre y puntuacion de los jugadores-->
-            <?php createPlayer();?>
+            <?php createPlayer($players);?>
             
         </div>
     <div id="middle">

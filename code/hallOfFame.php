@@ -75,8 +75,9 @@ if (isset($_COOKIE["table"])) {
 /////////////////////////////////////////////////////////////////
 
 array_multisort(array_map(function ($element) {
-    return $element["time"];
+    return $element["score"];
 }, $table), SORT_DESC, $table);
+
 /////////////////////////////////////////////////////////////////
 function formatTime($ss)
 {

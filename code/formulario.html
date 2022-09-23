@@ -8,53 +8,56 @@
 
 <body>
 
-    <div id="form_box">
 
-        <form id="form" action="game.php" method="GET">
-            <div id="form_top">
-                <div id="form_top_box">
-                    <label for="players" style="font-family: Arial, Helvetica, sans-serif;color: white;">Numero de
-                        jugadores:</label>
-                    <select name="players_cant" id="players" onchange="set_PlayerName(this.value)">
-                        <option value="1">1 Jugador</option>
-                        <option value="2">2 Jugadores</option>
-                        <option value="3">3 Jugadores</option>
-                        <option value="4">4 Jugadores</option>
-                    </select>
-                </div>
-
-
-                <div id="player_names">
-                    <input id="jugador_1" name="nom1" type="text" placeholder="Jugador 1" maxlength="13" required>
-                </div>
-                
+    <form id="form" action="game.php" method="GET">
+        <h1>GENSHINGRAMA!</h1>
+        <div class="players">
+            <label for="players" style="font-family: Arial, Helvetica, sans-serif;color: white;">Numero de
+                jugadores:</label>
+            <div class="select">
+                <select name="players_cant" class="player-select" onchange="set_PlayerName(this.value)">
+                    <option value="1">1 Jugador</option>
+                    <option value="2">2 Jugadores</option>
+                    <option value="3">3 Jugadores</option>
+                    <option value="4">4 Jugadores</option>
+                </select>
             </div>
-            <br>
-            <div id="middle">
-                    <label id="time_text" for="time">Tiempo de cada ronda:<input type="range" id="time" name="time" min="0" max="10" oninput="this.nextElementSibling.value = this.value"><output>5</output></label><br>
-                    <label class="check">
-                        <input type="radio" name="check" value="1" checked>
-                        <img src="../images/Xingqiu.png" alt="Option 1" width="50" height="85">
-                      </label>
-                      
-                      <label class="check">
-                        <input type="radio" name="check" value="2">
-                        <img src="../images/paimon_chibi.png" alt="Option 2" width="50" height="85">
-                      </label>
-                </div>
-            <br>
 
+        </div>
+        <div id="player_names">
+            <input id="jugador_1" name="nom1" type="text" placeholder="Jugador 1" maxlength="13" required>
+        </div>
+
+        <div class="time">
+            <label id="time_text" for="time">Tiempo de cada ronda:
+                <input type="range" id="time" name="time" min="0" max="10"
+                    oninput="this.nextElementSibling.value = this.value"><output>5</output></label>
+        </div>
+
+        <div class="family">
+            <p>Tipos de cartas</p>
+            <label class="check">
+                <input type="radio" name="check" value="1" checked>
+                <img src="../images/Xingqiu.png" alt="Option 1" width="50" height="85">
+            </label>
+            <label class="check">
+                <input type="radio" name="check" value="2">
+                <img src="../images/paimon_chibi.png" alt="Option 2" width="50" height="85">
+            </label>
+        </div>
+
+        <div class="dimensiones">
             <label style="font-family: Arial, Helvetica, sans-serif;color: white;">Tamaño de la tabla:
                 <input type="number" name="x" min="2" max="6" required> x <input type="number" name="y" min="2" max="4"
-                    required></label><br>
-            <div id="form_bottom">
-                <div id="form_bottom_box">
-                    <input type="submit" value="Enviar">
-                    <input type="reset" value="Restablecer">
-                </div>
-            </div>
-        </form>
+                    required></label>
+        </div>
+
+        <div class="buttons">
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Restablecer">
+    </form>
     </div>
+
 
 
 </body>
