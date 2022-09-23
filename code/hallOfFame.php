@@ -14,42 +14,20 @@ if (isset($_GET["scores"])) {
     $scores = [];
 }
 if (isset($_GET["timers"])) {
-    $timers = json_decode($_GET["timers"]);
+    $timers = json_decode($_GET["timers"],true);
 } else {
     $timers = [];
 }
 
+/////////////////////////////////////////////////////////////////
+$pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
 
-//Actualizamos las cookies, si es la primera vez que accedemos a esta pagina, creamos la cookie
-/*
-if (isset($_COOKIE["scores"])) {
-    $cookie_scores = json_decode($_COOKIE["scores"], true);
-    for ($i = 0; $i < count($cookie_scores); $i++) {
-        array_push($scores, $cookie_scores[$i]);
-    }
-    $json = json_encode($scores);
-    setcookie("scores", $json);
-} else {
-    $json = json_encode($scores);
-    setcookie("scores", $json);
-}
-
-if (isset($_COOKIE["players"])) {
-    $cookie_players = json_decode($_COOKIE["players"], true);
-    for ($i = 0; $i < count($cookie_players); $i++) {
-        array_push($players, $cookie_players[$i]);
-    }
-    $json = json_encode($players);
-    setcookie("players", $json);
-} else {
-    $json = json_encode($players);
-    setcookie("players", $json);
-}
-*/
-
-
-
-
+if($pageWasRefreshed ) {
+    $timers = [];
+    $scores = [];
+    $players = [];
+} 
+/////////////////////////////////////////////////////////////////
 //Si un jugador ha sacado una puntuacion superior a su partida anterior, la puntuacion se actualiza
 for ($i = 0; $i < count($players); $i++) {
     for ($j = 0; $j < count($players); $j++) {
@@ -71,60 +49,60 @@ for ($i = 0; $i < count($players); $i++) {
 $table = array();
 
 for ($i = 0; $i < count($players); $i++) {
-    $table[$i] = array("Jugador " . $players[$i],formatTime($timers[$i]),$scores[$i] . " Puntos");
+    $table[$i] = array("name" => "Jugador " . $players[$i], "time" => formatTime($timers[$i]), "score" => $scores[$i] . " Puntos");
 }
 
 
 
+/////////////////////////////////////////////////////////////////
+
+
 if (isset($_COOKIE["table"])) {
-    $table_cookie = json_decode($_COOKIE["table"],true);
+
+    $table_cookie = json_decode($_COOKIE["table"], true);
+
     
-    for ($i=0; $i < count($table_cookie); $i++) { 
-        array_push($table,$table_cookie[$i]);
-    }
-    if (count(array_diff($table,$table_cookie)) != null) {
-       setcookie("table",json_encode($table));
-    }
+      for ($i = 0; $i < count($table_cookie); $i++) {
+            array_push($table, $table_cookie[$i]);
+        }
+
+        setcookie("table", json_encode($table));  
     
-}else{
-    setcookie("table",json_encode($table));
+} else {
+    setcookie("table", json_encode($table));
 }
 
 /////////////////////////////////////////////////////////////////
 
+array_multisort(array_map(function ($element) {
+    return $element["time"];
+}, $table), SORT_DESC, $table);
+/////////////////////////////////////////////////////////////////
 function formatTime($ss)
 {
 
     $s = $ss % 60;
     if ($s < 10) {
-        $s = "0".$s;
+        $s = "0" . $s;
     }
     $m = floor(($ss % 3600) / 60);
     if ($m < 10) {
-        $m = "0".$m;
+        $m = "0" . $m;
     }
 
-    return $m.":".$s;
+    return $m . ":" . $s;
 }
-
+/////////////////////////////////////////////////////////////////
 //Creamos la tabla para el html
-function buildTable($table, $first_dim, $second_dim)
+function buildTable($table)
 {
 
 
-    for ($i = 0; $i < $first_dim; $i++) {
-        echo "<tr>";
-        for ($j = 0; $j < $second_dim; $j++) {
-
-
-
-            echo "<td>";
-            echo $table[$i][$j];
-            echo "</td>";
-        }
-        echo "</tr>";
+    foreach ($table as $player) {
+        echo "<tr><td>" . $player['name'] . "</td><td>" . $player['time'] . "</td><td class=\"score\">" . $player['score'] . "</td></tr>";
     }
 }
+/////////////////////////////////////////////////////////////////
 ?>
 
 
@@ -136,6 +114,7 @@ function buildTable($table, $first_dim, $second_dim)
 </head>
 
 <body>
+    
     <div class="top">
         <div class="logo">
             <img src="../images/fame_title.png" alt="" srcset="">
@@ -144,7 +123,7 @@ function buildTable($table, $first_dim, $second_dim)
     <div class="middle">
         <div class="table">
             <table>
-                <?php buildTable($table, count($table), 3) ?>
+                <?php buildTable($table) ?>
             </table>
         </div>
     </div>
