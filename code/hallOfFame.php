@@ -66,10 +66,10 @@ if (isset($_COOKIE["table"])) {
             array_push($table, $table_cookie[$i]);
         }
 
-        setcookie("table", json_encode($table));  
+        setcookie("table", json_encode($table), strtotime("+1 days"));  
     
 } else {
-    setcookie("table", json_encode($table));
+    setcookie("table", json_encode($table),strtotime("+1 days"));
 }
 
 /////////////////////////////////////////////////////////////////

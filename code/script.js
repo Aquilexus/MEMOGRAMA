@@ -52,6 +52,7 @@ function easterEgg(event) {
     } else {//Si se falla una letra reiniciamos 
         cont_pattern = 0;
     }
+    //Para evitar que detecte 2 veces el evento del teclado
     event.stopImmediatePropagation();
 
     //Si hemos encertado el pattern 
@@ -67,6 +68,7 @@ function easterEgg(event) {
     }
 }
 
+//Según el valor devuelto por el formulario, modificaremos la imagen de las cartas
 function setCharacters(value) {
 
     switch (value) {
@@ -84,7 +86,7 @@ function setCharacters(value) {
 }
 
 
-
+//Si alguien es tramposo inicializaremos la variable cheater
 function setCheater(valor) {
     this.isCheater = valor;
 }
@@ -122,6 +124,7 @@ function getScores() {
     return JSON.stringify(builded_scores);
 }
 
+//Para mandar los tiempos de cada jugador al formulario 
 function getTimers() {
     var timers =[tempo1,tempo2,tempo3,tempo4];
     var builded_timers = [];
@@ -183,6 +186,7 @@ function countdown() {
     time--;
 
 
+    //Según el turno de cada jugador incrementaremos su temporizador correspondiente
     switch (turn) {
         case 1:
             var temp_str =  toMinutes(tempo1)+":"+toSeconds(tempo1);
@@ -211,7 +215,7 @@ function countdown() {
     }
 }
 
-
+//Funcion para formatear el tiempo de cada jugador a segundos
 function toSeconds(time) {
 
    
@@ -224,6 +228,7 @@ function toSeconds(time) {
 
 }
 
+//Funcion para formatear el tiempo de cada jugador a minutos
 function toMinutes(time){
     let minutes = Math.floor(time / 60);
     minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -283,6 +288,7 @@ function turn_rotation() {
     }
 
 
+    //Cuando es el turno del jugador correspondiente, se modifica el estilo del div del jugador
     for (let i = 1; i <= num_players; i++) {
         var bg = document.getElementById("name" + i);
 
@@ -563,19 +569,13 @@ function enableClick() {
 //Generacion de los botones nueva partida y hall of fame
 function check_ended() {
 
+    //Si hemos encontrado todas las cartas
     if ((cards_found.length / 2) == characters_available) {
         game_ended = true;
     }
+    //Si el juego se acabó y no es tramposo
+     var butons = document.getElementById("buttons");
     if (game_ended && (!isCheater)) {
-
-        var butons = document.getElementById("buttons");
-
-        var imput = document.createElement("BUTTON");
-        imput.appendChild(document.createTextNode("Nueva Partida"));
-        imput.setAttribute("onclick", "window.history.go(-1);");
-        imput.id = "new_game";
-        imput.className = "button"
-        butons.prepend(imput);
 
         butons = document.getElementById("fame")
         var imput2 = document.createElement("BUTTON");
@@ -598,6 +598,8 @@ function check_ended() {
         butons.appendChild(hidden2);
 
     }
+
+    
     if (isCheater && game_ended) {
         alert("NO TE MERECES TENER TU NOMBRE EN EL SALON DE LA FAMA !");
         alert("TRAMPOSO !")
@@ -609,6 +611,12 @@ function check_ended() {
         //Paramos los temporizadores
         clearInterval(interval);
         clearInterval(contar);
+        var imput = document.createElement("BUTTON");
+    imput.appendChild(document.createTextNode("Nueva Partida"));
+    imput.setAttribute("onclick", "window.history.go(-1);");
+    imput.id = "new_game";
+    imput.className = "button"
+    butons.prepend(imput);
     }
 
 }
