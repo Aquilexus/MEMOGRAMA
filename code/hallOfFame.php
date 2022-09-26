@@ -20,6 +20,7 @@ if (isset($_GET["timers"])) {
 }
 
 /////////////////////////////////////////////////////////////////
+//Detector de si se refresca la pagina, si se refresca los valores que se mandan del formulario anterior se resetean
 $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
 
 if($pageWasRefreshed ) {
@@ -45,7 +46,7 @@ for ($i = 0; $i < count($players); $i++) {
 
 
 /////////////////////////////////////////////////////////////////
-
+//Creamos una array multidimensional asociativa y montamos los nombres, tiempos y puntuacion de cada jugador
 $table = array();
 
 for ($i = 0; $i < count($players); $i++) {
@@ -55,8 +56,7 @@ for ($i = 0; $i < count($players); $i++) {
 
 
 /////////////////////////////////////////////////////////////////
-
-
+//Donde se crea y actualiza la cookie y guardamos los valores de $table
 if (isset($_COOKIE["table"])) {
 
     $table_cookie = json_decode($_COOKIE["table"], true);
@@ -73,12 +73,13 @@ if (isset($_COOKIE["table"])) {
 }
 
 /////////////////////////////////////////////////////////////////
-
+//ordenamos el array para que muestre la puntuación de la mas alta a la mas pequeña
 array_multisort(array_map(function ($element) {
     return $element["score"];
 }, $table), SORT_DESC, $table);
 
 /////////////////////////////////////////////////////////////////
+//Formatea el tiempo de seguandos a minutos y segundos
 function formatTime($ss)
 {
 
@@ -97,8 +98,6 @@ function formatTime($ss)
 //Creamos la tabla para el html
 function buildTable($table)
 {
-
-
     foreach ($table as $player) {
         echo "<tr><td>" . $player['name'] . "</td><td>" . $player['time'] . "</td><td class=\"score\">" . $player['score'] . "</td></tr>";
     }
