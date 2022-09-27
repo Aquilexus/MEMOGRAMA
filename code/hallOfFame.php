@@ -53,7 +53,12 @@ for ($i = 0; $i < count($players); $i++) {
     $table[$i] = array("name" => "Jugador " . $players[$i], "time" => formatTime($timers[$i]), "score" => $scores[$i] . " Puntos");
 }
 
+/////////////////////////////////////////////////////////////////
 
+//ordenamos el array para que muestre la puntuación de la mas alta a la mas pequeña
+array_multisort(array_map(function ($element) {
+    return $element["score"];
+}, $table), SORT_DESC, $table);
 
 /////////////////////////////////////////////////////////////////
 //Donde se crea y actualiza la cookie y guardamos los valores de $table
@@ -73,12 +78,7 @@ if (isset($_COOKIE["table"])) {
 }
 
 /////////////////////////////////////////////////////////////////
-//ordenamos el array para que muestre la puntuación de la mas alta a la mas pequeña
-array_multisort(array_map(function ($element) {
-    return $element["score"];
-}, $table), SORT_DESC, $table);
 
-/////////////////////////////////////////////////////////////////
 //Formatea el tiempo de seguandos a minutos y segundos
 function formatTime($ss)
 {
@@ -104,8 +104,6 @@ function buildTable($table)
 }
 /////////////////////////////////////////////////////////////////
 ?>
-
-
 <!DOCTYPE html>
 <html>
 
