@@ -612,6 +612,7 @@ function check_ended() {
         //Paramos los temporizadores
         clearInterval(interval);
         clearInterval(contar);
+        butons = document.getElementById("buttons");
         var imput = document.createElement("BUTTON");
     imput.appendChild(document.createTextNode("Nueva Partida"));
     imput.setAttribute("onclick", "window.history.go(-1);");

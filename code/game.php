@@ -45,9 +45,7 @@ if (isset($_GET["nom4"])){
 
 
 //Funcion para crear los divs de cada jugador  
-function createPlayer(){
-
-    global $players;
+function createPlayer($players){
 
     for ($i=0; $i <count($players); $i++) { 
         echo "<div class=\"player\" id=\"p".($i+1)."\">";
@@ -57,12 +55,9 @@ function createPlayer(){
     }
 }
 //Funcion que duplica los nombres de $characters ej: Bennett, Bennett_dup
-function duplicateCharacters(){
+function duplicateCharacters($characters,$x,$y){
 
     global $characters_duplicate;
-    global $characters;
-    global $x;
-    global $y;
 
     $contador = 0;
         for ($i = 0; $i < ($x * $y) / 2; $i++) {
@@ -79,14 +74,12 @@ function duplicateCharacters(){
                 $contador++;
             }
         }
+        return $characters_duplicate;
 }
 
-//Crea tabla con las tarjetas ya mezcladas
-function createBoard(){
 
-    global $characters_duplicate;
-    global $x;
-    global $y;
+//Crea tabla con las tarjetas ya mezcladas
+function createBoard($characters_duplicate,$x,$y){
 
     //Condicion para saber si las cartas son divisibles por 2
     if (($x * $y) % 2 == 0) {
@@ -153,9 +146,9 @@ function getPlayers($players){
     <div id="middle">
         <!--Llamamos la funciones para repartir las cartas-->
         <?php
-        duplicateCharacters();
+        duplicateCharacters($characters,$x,$y);
         shuffle($characters_duplicate);
-        createBoard();
+        createBoard($characters_duplicate,$x,$y);
         ?>
     </div>
     </div><!--Nota : si quitamos este div se descolocan los botones-->

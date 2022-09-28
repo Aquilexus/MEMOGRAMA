@@ -50,15 +50,8 @@ for ($i = 0; $i < count($players); $i++) {
 $table = array();
 
 for ($i = 0; $i < count($players); $i++) {
-    $table[$i] = array("name" => "Jugador " . $players[$i], "time" => formatTime($timers[$i]), "score" => $scores[$i] . " Puntos");
+    $table[$i] = array("name" => "Jugador " . $players[$i], "time" => formatTime($timers[$i]), "score" => $scores[$i]);
 }
-
-/////////////////////////////////////////////////////////////////
-
-//ordenamos el array para que muestre la puntuación de la mas alta a la mas pequeña
-array_multisort(array_map(function ($element) {
-    return $element["score"];
-}, $table), SORT_DESC, $table);
 
 /////////////////////////////////////////////////////////////////
 //Donde se crea y actualiza la cookie y guardamos los valores de $table
@@ -76,6 +69,12 @@ if (isset($_COOKIE["table"])) {
 } else {
     setcookie("table", json_encode($table),strtotime("+1 days"));
 }
+
+/////////////////////////////////////////////////////////////////
+//ordenamos el array para que muestre la puntuación de la mas alta a la mas pequeña
+array_multisort(array_map(function ($element) {
+    return $element["score"];
+}, $table), SORT_DESC, $table);
 
 /////////////////////////////////////////////////////////////////
 
@@ -99,7 +98,7 @@ function formatTime($ss)
 function buildTable($table)
 {
     foreach ($table as $player) {
-        echo "<tr><td>" . $player['name'] . "</td><td>" . $player['time'] . "</td><td class=\"score\">" . $player['score'] . "</td></tr>";
+        echo "<tr><td>" . $player['name'] . "</td><td>" . $player['time'] . "</td><td class=\"score\">" . $player['score'] . " Puntos</td></tr>";
     }
 }
 /////////////////////////////////////////////////////////////////
