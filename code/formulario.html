@@ -11,6 +11,7 @@
 
     <form id="form" action="game.php" method="GET">
         <h1>GENSHINGRAMA!</h1>
+        <!--Desplegable numero de jugadores -->
         <div class="players">
             <label for="players" style="font-family: Arial, Helvetica, sans-serif;color: white;">Numero de
                 jugadores:</label>
@@ -22,18 +23,19 @@
                     <option value="4">4 Jugadores</option>
                 </select>
             </div>
-
+            <!--Texto donde se ponen los nombres de los jugadores-->
         </div>
         <div id="player_names">
             <input id="jugador_1" name="nom1" type="text" placeholder="Jugador 1" maxlength="13" required>
         </div>
-
+        <!--Range del tiempo de ronda-->
         <div class="time">
             <label id="time_text" for="time">Tiempo de cada ronda:
                 <input type="range" id="time" name="time" min="0" max="10"
                     oninput="this.nextElementSibling.value = this.value"><output>5</output></label>
         </div>
 
+        <!--Seleccion de familia-->
         <div class="family">
             <p>Tipos de cartas</p>
             <label class="check">
@@ -46,17 +48,20 @@
             </label>
         </div>
 
+        <!--Seleccion de tamaño de tabla-->
         <div class="dimensiones">
             <label style="font-family: Arial, Helvetica, sans-serif;color: white;">Tamaño de la tabla:
                 <input type="number" name="x" min="2" max="6" required> x <input type="number" name="y" min="2" max="4"
                     required></label>
         </div>
 
+        <!--Form para mandar los datos del jugador-->
         <div class="buttons">
             <input type="submit" value="Enviar">
             <input type="reset" value="Restablecer">
         </div>
         <div id="hall"></div>
+        <!--Para acceder al hall of fame-->
     </form>
 <form id="form2" action="hallOfFame.php">
             <input type="submit" value="Hall of Fame">

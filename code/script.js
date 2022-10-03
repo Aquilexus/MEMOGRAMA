@@ -169,7 +169,6 @@ function countdown() {
 
     var time_div = document.getElementById("countdown");
     time_div.innerHTML = "";
-
     //Cuando el tiempo llegue a - de 0 reseteamos tiempo, cambimos turno y reseteamos LA carta girada
     if (time < 0) {
         time = this.time_saved;
@@ -177,15 +176,9 @@ function countdown() {
         resetCards();
         turn_rotation();
     }
-
     var time_player = document.getElementById("tempo" + turn);
-
-
-
     time_div.innerHTML = time;
     time--;
-
-
     //Según el turno de cada jugador incrementaremos su temporizador correspondiente
     switch (turn) {
         case 1:
@@ -193,22 +186,18 @@ function countdown() {
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
             tempo1++;
-    
-            
             break;
         case 2:
             var temp_str =  toMinutes(tempo2)+":"+toSeconds(tempo2);
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
             tempo2++;
-   
             break;
         case 3:
             var temp_str =  toMinutes(tempo3)+":"+toSeconds(tempo3);
             time_player.innerHTML = "";
             time_player.innerHTML = temp_str;
              tempo3++;
-    
             break;
         case 4:
             var temp_str =  toMinutes(tempo4)+":"+toSeconds(tempo4);
@@ -385,18 +374,13 @@ function set_PlayerName(cant) {
 
 //Funcion que lo que hace es cambiar la imagen de la carta por el personage correspondiente segun su id
 function flip(nombre) {
-
-
     //Cargamos un sonido
     var flip_sound = new Audio("../sound/Card-flip-sound-effect.mp3")
-
-
     //Esta parte compara la id de la imagen con la lista de personajes disponibles, una vez que encuentra correspondencia
     //Le asigna la imagen del personage correspondiente de la id
     let i = 0;
     var found = false;//Condicion para salir del bucle una vez encuentre correspondencia
     while ((i < characters.length) && (!found)) {
-
         //Si la id incluye un nombrer de la lista de caracteres (porque hay id's que contienen la extension _dup ej: pepito_dup)
         if (nombre.includes(characters[i])) {
             var state_card = document.getElementById(nombre);
@@ -406,9 +390,6 @@ function flip(nombre) {
         }
         else i++;
     }
-    /////////////////////////////////
-
-
     //Esta parte esta para guardar valores de las 2 cartas (cada 2 clicks), una vez tenemos las 2 cartas las comparamos
     if (card1 == "") {
         card1 = nombre;
@@ -422,8 +403,6 @@ function flip(nombre) {
         setTimeout(check_cards, 500);//timout para dejar al jugador ver la segunda carta durante un instante
         setTimeout(check_ended, 1000);
         removeClick();//Funcion que desactiva el click de las otras cartas mientras se comprueba si las 2 cartas
-
-
     }
 
 
@@ -434,9 +413,6 @@ function check_cards() {
     //Para saber cual carta tiene la extension _dup
     var card1_dup = false;
     var card2_dup = false;
-
-
-
     //Verificamos si una de las cartas contiene el nombre _dup y lo quitamos para comparar el nombre
     if (card1.includes("_dup")) {
         card1_dup = true;
@@ -445,11 +421,8 @@ function check_cards() {
         card2_dup = true;
         card2 = card2.replace("_dup", "");
     }
-
     //comprobamos el nombre de las cartas, si no son iguales se le vuelve a asignar el nombre _dup y se vuelven a girar
     if (card1 != card2) {
-
-
         //Los 2 if's es para saber a que carta hay que reasignar el _dup
         if (card1_dup) {
             document.getElementById(card1 + "_dup").src = "../images/card back.png";
@@ -458,7 +431,6 @@ function check_cards() {
             document.getElementById(card2 + "_dup").src = "../images/card back.png";
             document.getElementById(card1).src = "../images/card back.png";
         }
-
         if (card1_dup && card2_dup) {
             document.getElementById(card2 + "_dup").src = "../images/card back.png";
             document.getElementById(card1 + "_dup").src = "../images/card back.png";
@@ -466,72 +438,45 @@ function check_cards() {
             document.getElementById(card2).src = "../images/card back.png";
             document.getElementById(card1).src = "../images/card back.png";
         }
-
         //Volvemos a activar el click a todas las cartas
         enableClick();
-
         turn++;
     } else {
-
-
         //Si las cartas son iguales (el if es para distingir quien tenia el _dup)
         if (card1_dup && !card2_dup) {
-
-
             var x = document.getElementById(card1 + "_dup");
             var y = document.getElementById(card2);
-
             cards_found[counter_cards_found] = card2;
             counter_cards_found++;
             cards_found[counter_cards_found] = card1;
             counter_cards_found++;
-
             isPoint = true;
-
             //Actualizamos la puntuacion del jugador correspondiente
             updateScore();
-
             x.className = "ok";
             y.className = "ok";
             enableClick();
-
             //Y le volvemos a quitar el click a las cartas pares
-
-
             var point = new Audio("../sound/short-success.mp3");
             point.play();
-
         } else if (card2_dup && !card1_dup) {
-
-
             var x = document.getElementById(card1);
             var y = document.getElementById(card2 + "_dup");
-
-
             //Sirve para contar y listar las cartas encontradas
             cards_found[counter_cards_found] = card1;
             counter_cards_found++;
             cards_found[counter_cards_found] = card2;
             counter_cards_found++;
             ///////////////////////////////////////////////////
-
             //Se actualiza la puntuacion del jugador actual, se cambia la clase de la carta y se vuelve a activar el evento onclick de las otras cartas
             updateScore();
             x.className = "ok";
             y.className = "ok";
             enableClick();
-
-
-
             isPoint = true;
-
-
             var point = new Audio("../sound/short-success.mp3");
             point.play();
-
         }
-
-
     }
 
     //Actualizamos el turno del jugador y resetamos los nombres de carta1 y 2
@@ -569,7 +514,6 @@ function enableClick() {
 //Verificacion si se encontraron todas las cartas
 //Generacion de los botones nueva partida y hall of fame
 function check_ended() {
-
     //Si hemos encontrado todas las cartas
     if ((cards_found.length / 2) == characters_available) {
         game_ended = true;
@@ -577,7 +521,6 @@ function check_ended() {
     //Si el juego se acabó y no es tramposo
      var butons = document.getElementById("buttons");
     if (game_ended && (!isCheater)) {
-
         butons = document.getElementById("fame")
         var imput2 = document.createElement("BUTTON");
         imput2.appendChild(document.createTextNode("Hall of Fame"));
@@ -585,29 +528,22 @@ function check_ended() {
         imput2.className = "button";
         imput2.type = "submit";
         butons.appendChild(imput2);
-
         var hidden = document.createElement("input");
         hidden.setAttribute("name", "scores");
         hidden.setAttribute("value", getScores());
         hidden.setAttribute("type", "hidden");
         butons.appendChild(hidden);
-
         var hidden2 = document.createElement("input");
         hidden2.setAttribute("name","timers");
         hidden2.setAttribute("value",getTimers());
         hidden2.setAttribute("type","hidden");
         butons.appendChild(hidden2);
-
     }
-
-    
     if (isCheater && game_ended) {
         alert("NO TE MERECES TENER TU NOMBRE EN EL SALON DE LA FAMA !");
         alert("TRAMPOSO !")
         alert("ESCORIA !");
-
     }
-
     if (game_ended) {
         //Paramos los temporizadores
         clearInterval(interval);
